@@ -57,10 +57,12 @@ const DayColumn: React.FC<DayColumnProps> = ({ day }) => {
   const slotGroups = groupConsecutiveSlots(day.slots);
   
   const renderSlotGroup = (group: SlotGroup) => {
-    // Format time range (e.g., "8:00 - 15:00")
+    // Format time range without ":00" suffix (e.g., "8 - 15" instead of "8:00 - 15:00")
+    const formatTime = (time: string) => time.replace(":00", "");
+    
     const timeDisplay = group.slots.length > 1 
-      ? `${group.startTime} - ${group.endTime}`
-      : group.startTime;
+      ? `${formatTime(group.startTime)} - ${formatTime(group.endTime)}`
+      : formatTime(group.startTime);
     
     let slotClass = "";
     
@@ -93,13 +95,13 @@ const DayColumn: React.FC<DayColumnProps> = ({ day }) => {
         )}
       >
         <div className="flex flex-col">
-          <span className="font-medium text-sm text-gray-700">{timeDisplay}</span>
+          <span className="font-bold text-gray-700">{timeDisplay}</span>
           
           {/* For model slots, list all models in this block */}
           {group.status === "gebucht" && group.slots.map(slot => 
             slot.model && (
               <span key={slot.id} className="font-semibold text-base mt-1 text-luxury-black">
-                {slot.time} {slot.model}
+                {formatTime(slot.time)} {slot.model}
               </span>
             )
           )}

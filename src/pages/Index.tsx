@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "@/components/Layout";
 import Calendar from "@/components/Calendar";
 import RulesFooter from "@/components/RulesFooter";
+import Assistant from "@/components/Assistant";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { useAuth } from "@/contexts/AuthContext";
 
