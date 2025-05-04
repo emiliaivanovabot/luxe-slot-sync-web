@@ -1,13 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React from "react";
+import Layout from "@/components/Layout";
+import Calendar from "@/components/Calendar";
+import RulesFooter from "@/components/RulesFooter";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
+
+// Main content component that requires authentication
+const MainContent: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+  
+  if (!isAuthenticated) {
+    return null;
+  }
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="space-y-8">
+      <Calendar />
+      <RulesFooter />
     </div>
+  );
+};
+
+// Index page with auth provider
+const Index: React.FC = () => {
+  return (
+    <AuthProvider>
+      <Layout>
+        <MainContent />
+      </Layout>
+    </AuthProvider>
   );
 };
 
