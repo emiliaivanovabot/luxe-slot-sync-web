@@ -95,7 +95,7 @@ const DayColumn: React.FC<DayColumnProps> = ({ day }) => {
         )}
       >
         <div className="flex flex-col">
-          <span className="font-bold text-gray-700">{timeDisplay}</span>
+          <span className="font-bold text-gray-700 text-lg">{timeDisplay}</span>
           
           {/* For model slots, list all models in this block */}
           {group.status === "gebucht" && group.slots.map(slot => 
